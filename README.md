@@ -119,3 +119,20 @@ cd sampler && python setup.py install && cd ..
 Running demo.py, train_stereo.py or evaluate.py with `--corr_implementation reg_cuda` together with `--mixed_precision` will speed up the model without impacting performance.
 
 To significantly decrease memory consumption on high resolution images, use `--corr_implementation alt`. This implementation is slower than the default, however.
+
+## Useful Commands for Windows
+```Shell
+python demo.py --restore_ckpt models/raftstereo-middlebury.pth --corr_implementation alt --mixed_precision -l datasets/Middlebury/MiddEval3/testF/*/im0.png -r datasets/Middlebury/MiddEval3/testF/*/im1.png
+```
+
+```Shell
+python demo.py --restore_ckpt models/raftstereo-realtime.pth --shared_backbone --n_downsample 3 --n_gru_layers 2 --slow_fast_gru --valid_iters 7 --corr_implementation reg_cuda --mixed_precision  -l datasets/Middlebury/MiddEval3/testF/*/im0.png -r datasets/Middlebury/MiddEval3/testF/*/im1.png
+```
+
+```Shell
+python demo.py --restore_ckpt models/raftstereo-eth3d.pth -l datasets/ETH3D/two_view_testing/*/im0.png -r datasets/ETH3D/two_view_testing/*/im1.png
+```
+
+```Shell
+python demo.py --restore_ckpt models/raftstereo-realtime.pth --shared_backbone --n_downsample 3 --n_gru_layers 2 --slow_fast_gru --valid_iters 7 --corr_implementation reg_cuda --mixed_precision -l datasets/ETH3D/two_view_testing/*/im0.png -r datasets/ETH3D/two_view_testing/*/im1.png
+```

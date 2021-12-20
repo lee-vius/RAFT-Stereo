@@ -44,7 +44,7 @@ def demo(args):
             image1, image2 = padder.pad(image1, image2)
 
             _, flow_up = model(image1, image2, iters=args.valid_iters, test_mode=True)
-            file_stem = imfile1.split('/')[-2]
+            file_stem = imfile1.split('\\')[-2]
             if args.save_numpy:
                 np.save(output_directory / f"{file_stem}.npy", flow_up.cpu().numpy().squeeze())
             plt.imsave(output_directory / f"{file_stem}.png", -flow_up.cpu().numpy().squeeze(), cmap='jet')
@@ -71,5 +71,5 @@ if __name__ == '__main__':
     parser.add_argument('--n_gru_layers', type=int, default=3, help="number of hidden GRU levels")
     
     args = parser.parse_args()
-
-    demo(args)
+    print(args)
+    # demo(args)
